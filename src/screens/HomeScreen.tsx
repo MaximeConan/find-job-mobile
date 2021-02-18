@@ -4,7 +4,9 @@ import { useQuery } from "@apollo/client"
 import { JOBS_QUERY } from "../queries/jobQueries"
 import { IJob } from "../interfaces/jobInterfaces"
 import { Divider } from "react-native-paper"
+
 import Card from "../components/Card"
+import Layout from "../components/Layout"
 
 type Props = {
   navigation: any
@@ -23,7 +25,7 @@ const HomeScreen = ({ navigation }: Props) => {
   }
 
   return (
-    <View>
+    <Layout>
       {loading ? (
         <ActivityIndicator />
       ) : (
@@ -33,7 +35,7 @@ const HomeScreen = ({ navigation }: Props) => {
           ItemSeparatorComponent={() => <Divider />}
         />
       )}
-    </View>
+    </Layout>
   )
 }
 

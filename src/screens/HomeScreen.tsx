@@ -1,38 +1,37 @@
 import React from "react"
-import { ActivityIndicator, FlatList, Text, View } from "react-native"
+import { ActivityIndicator, FlatList, View } from "react-native"
 import { useQuery } from "@apollo/client"
 import { JOBS_QUERY } from "../queries/jobQueries"
 import { IJob } from "../interfaces/jobInterfaces"
-import { TouchableOpacity } from "react-native-gesture-handler"
+import { Divider } from "react-native-paper"
+import Card from "../components/Card"
 
 type Props = {
   navigation: any
 }
 
 const HomeScreen = ({ navigation }: Props) => {
-  const { loading, error, data } = useQuery(JOBS_QUERY)
+  const { loading, data } = useQuery(JOBS_QUERY)
   const jobs: IJob[] = data?.jobs
 
-  const onJobPress = (id: string) => () => {
-    navigation.navigate("JobDetails", { id })
+  const onJobPress = (id: string, slug: string, companySlug: string) => {
+    navigation.navigate("JobDetails", { id, slug, companySlug })
   }
 
   const _renderItem = ({ item }: { item: IJob }) => {
-    return (
-      <TouchableOpacity onPress={onJobPress(item.id)}>
-        <Text>{item.title}</Text>
-      </TouchableOpacity>
-    )
+    return <Card data={item} onJobPress={onJobPress} />
   }
 
   return (
     <View>
-      <Text>Hello world !</Text>
-
       {loading ? (
         <ActivityIndicator />
       ) : (
-        <FlatList data={jobs} renderItem={_renderItem} />
+        <FlatList
+          data={jobs}
+          renderItem={_renderItem}
+          ItemSeparatorComponent={() => <Divider />}
+        />
       )}
     </View>
   )

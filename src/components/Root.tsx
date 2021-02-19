@@ -1,34 +1,66 @@
 import React from "react"
 import "react-native-gesture-handler"
+import { Ionicons } from "@expo/vector-icons"
+
 import { NavigationContainer } from "@react-navigation/native"
-import { createStackNavigator } from "@react-navigation/stack"
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { useTheme } from "react-native-paper"
 
-import HomeScreen from "../screens/HomeScreen"
-import JobDetailsScreen from "../screens/JobDetailsScreen"
+import HomeStackScreen from "../navigation/HomeStackScreen"
 import ContactScreen from "../screens/ContactScreen"
-
-import { RootStackParamList } from "../interfaces/routesInterfaces"
 
 export default function Root() {
   const theme = useTheme()
 
-  const Stack = createStackNavigator<RootStackParamList>()
+  const Tab = createBottomTabNavigator()
 
-  const customHeader = {
-    headerStyle: {
-      backgroundColor: theme.colors.primary,
+  const resolveTabIcons = (isFocused: boolean, name: string) => {
+    switch (name) {
+      case "Home":
+        return isFocused
+          ? "ios-information-circle"
+          : "ios-information-circle-outline"
+
+      case "Home":
+        return isFocused ? "ios-list-box" : "ios-list"
+
+      default:
+        return isFocused
+          ? "ios-checkmark-circle-outline"
+          : "ios-checkmark-circle"
+    }
+  }
+
+  const screenOptions = ({ route }) => ({
+    tabBarIcon: ({
+      focused,
+      color,
+      size,
+    }: {
+      focused: string
+      color: string
+      size: number
+    }) => {
+      const iconName = resolveTabIcons(focused === route.name, route.name)
+
+      return <Ionicons name={iconName} size={size} color={color} />
     },
-    headerTintColor: theme.colors.white,
+  })
+
+  const tabBarOptions = {
+    activeTintColor: theme.colors.primary,
+    inactiveTintColor: theme.colors.accent,
   }
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={customHeader}>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="JobDetails" component={JobDetailsScreen} />
-        <Stack.Screen name="Contact" component={ContactScreen} />
-      </Stack.Navigator>
+      <Tab.Navigator
+        screenOptions={screenOptions}
+        tabBarOptions={tabBarOptions}
+      >
+        <Tab.Screen name="Home" component={HomeStackScreen} />
+        <Tab.Screen name="Contact" component={ContactScreen} />
+      </Tab.Navigator>
     </NavigationContainer>
   )
 }

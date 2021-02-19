@@ -7,17 +7,17 @@ import styles from "./__styles__/Card.styles"
 
 type Props = {
   data: IJob
-  onJobPress: (id: string, slug: string, companySlug: string) => void
+  onJobPress: (slug: string, companySlug: string) => void
 }
 
 const Card = ({ data, onJobPress }: Props) => {
   const _onPress = () => {
-    onJobPress(data.id, data.slug, data.company.slug)
+    onJobPress(data.slug, data.company.slug)
   }
 
   return (
     <_Card style={styles.container}>
-      <_Card.Title title={data.title} />
+      <_Card.Title style={styles.title} title={data.title} />
       <_Card.Content>
         <Paragraph>{data.description.slice(0, 100) + "..."}</Paragraph>
       </_Card.Content>

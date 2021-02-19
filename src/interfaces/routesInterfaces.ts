@@ -1,5 +1,8 @@
-export interface IRoutes = {
+export type RootStackParamList = {
   Home: undefined
-  JobDetails: undefined
+  JobDetails: {
+    slug: string
+    companySlug: string
+  }
   Contact: undefined
 }

@@ -4,20 +4,25 @@ import { useQuery } from "@apollo/client"
 import { JOBS_QUERY } from "../queries/jobQueries"
 import { IJob } from "../interfaces/jobInterfaces"
 import { Divider } from "react-native-paper"
+import { StackNavigationProp } from "@react-navigation/stack"
+
+import { RootStackParamList } from "../interfaces/routesInterfaces"
+import { RouteProp } from "@react-navigation/core"
 
 import Card from "../components/Card"
 import Layout from "../components/Layout"
 
-type Props = {
-  navigation: any
-}
+type RootStackComponent<RouteName extends keyof RootStackParamList> = React.FC<{
+  navigation: StackNavigationProp<RootStackParamList, RouteName>
+  route: RouteProp<RootStackParamList, RouteName>
+}>
 
-const HomeScreen = ({ navigation }: Props) => {
+const HomeScreen: RootStackComponent<"Home"> = ({ navigation }) => {
   const { loading, data } = useQuery(JOBS_QUERY)
   const jobs: IJob[] = data?.jobs
 
-  const onJobPress = (id: string, slug: string, companySlug: string) => {
-    navigation.navigate("JobDetails", { id, slug, companySlug })
+  const onJobPress = (slug: string, companySlug: string) => {
+    navigation.navigate("JobDetails", { slug, companySlug })
   }
 
   const _renderItem = ({ item }: { item: IJob }) => {

@@ -1,0 +1,34 @@
+import React from "react"
+import "react-native-gesture-handler"
+import { NavigationContainer } from "@react-navigation/native"
+import { createStackNavigator } from "@react-navigation/stack"
+import { useTheme } from "react-native-paper"
+
+import HomeScreen from "../screens/HomeScreen"
+import JobDetailsScreen from "../screens/JobDetailsScreen"
+import ContactScreen from "../screens/ContactScreen"
+
+import { RootStackParamList } from "../interfaces/routesInterfaces"
+
+export default function Root() {
+  const theme = useTheme()
+
+  const Stack = createStackNavigator<RootStackParamList>()
+
+  const customHeader = {
+    headerStyle: {
+      backgroundColor: theme.colors.primary,
+    },
+    headerTintColor: theme.colors.white,
+  }
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={customHeader}>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="JobDetails" component={JobDetailsScreen} />
+        <Stack.Screen name="Contact" component={ContactScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
+}

@@ -4,4 +4,7 @@ export default StyleSheet.create({
   container: {
     marginBottom: 16,
   },
+  title: {
+    padding: 16,
+  },
 })

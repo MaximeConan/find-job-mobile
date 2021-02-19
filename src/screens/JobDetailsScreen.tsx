@@ -3,18 +3,23 @@ import { useQuery } from "@apollo/client"
 import { ActivityIndicator, View } from "react-native"
 import { Chip, Paragraph, Title } from "react-native-paper"
 import { ScrollView } from "react-native-gesture-handler"
+import { RouteProp } from "@react-navigation/native"
+
+import { RootStackParamList } from "../interfaces/routesInterfaces"
 
 import { IFullJob, ITag } from "../interfaces/jobInterfaces"
 import { JOB_BY_SLUG_QUERY } from "../queries/jobQueries"
 
 import styles from "./__styles__/JobDetailsScreen.styles"
 import Layout from "../components/Layout"
+import { StackNavigationProp } from "@react-navigation/stack"
 
-type Props = {
-  route: any
-}
+type RootStackComponent<RouteName extends keyof RootStackParamList> = React.FC<{
+  navigation: StackNavigationProp<RootStackParamList, RouteName>
+  route: RouteProp<RootStackParamList, RouteName>
+}>
 
-const JobDetailsScreen = ({ route }: Props) => {
+const JobDetailsScreen: RootStackComponent<"JobDetails"> = ({ route }) => {
   const { slug, companySlug } = route.params
   const { loading, data } = useQuery(JOB_BY_SLUG_QUERY, {
     variables: { slug, company: companySlug },

@@ -6,28 +6,28 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { useTheme } from "react-native-paper"
 
+import { RootTabParamList } from "../interfaces/routesInterfaces"
+
 import HomeStackScreen from "../navigation/HomeStackScreen"
 import ContactScreen from "../screens/ContactScreen"
 
 export default function Root() {
   const theme = useTheme()
 
-  const Tab = createBottomTabNavigator()
+  const Tab = createBottomTabNavigator<RootTabParamList>()
 
-  const resolveTabIcons = (isFocused: boolean, name: string) => {
+  const resolveTabIcons = (isFocused: boolean, name: string): string => {
     switch (name) {
       case "Home":
         return isFocused
-          ? "ios-information-circle"
-          : "ios-information-circle-outline"
+          ? "md-information-circle"
+          : "md-information-circle-outline"
 
-      case "Home":
-        return isFocused ? "ios-list-box" : "ios-list"
+      case "Contact":
+        return isFocused ? "md-list-box" : "md-list"
 
       default:
-        return isFocused
-          ? "ios-checkmark-circle-outline"
-          : "ios-checkmark-circle"
+        return isFocused ? "md-checkmark-circle-outline" : "md-checkmark-circle"
     }
   }
 
@@ -50,6 +50,11 @@ export default function Root() {
   const tabBarOptions = {
     activeTintColor: theme.colors.primary,
     inactiveTintColor: theme.colors.accent,
+    style: {
+      height: 60,
+      paddingTop: 8,
+      paddingBottom: 8,
+    },
   }
 
   return (

@@ -6,15 +6,15 @@ import { IJob } from "../interfaces/jobInterfaces"
 import { Divider } from "react-native-paper"
 import { StackNavigationProp } from "@react-navigation/stack"
 
-import { RootStackParamList } from "../interfaces/routesInterfaces"
+import { HomeStackParamList } from "../interfaces/routesInterfaces"
 import { RouteProp } from "@react-navigation/core"
 
 import Card from "../components/Card"
 import Layout from "../components/Layout"
 
-type RootStackComponent<RouteName extends keyof RootStackParamList> = React.FC<{
-  navigation: StackNavigationProp<RootStackParamList, RouteName>
-  route: RouteProp<RootStackParamList, RouteName>
+type RootStackComponent<RouteName extends keyof HomeStackParamList> = React.FC<{
+  navigation: StackNavigationProp<HomeStackParamList, RouteName>
+  route: RouteProp<HomeStackParamList, RouteName>
 }>
 
 const HomeScreen: RootStackComponent<"Home"> = ({ navigation }) => {

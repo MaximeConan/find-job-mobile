@@ -6,12 +6,12 @@ import { useTheme } from "react-native-paper"
 import HomeScreen from "../screens/HomeScreen"
 import JobDetailsScreen from "../screens/JobDetailsScreen"
 
-import { RootStackParamList } from "../interfaces/routesInterfaces"
+import { HomeStackParamList } from "../interfaces/routesInterfaces"
 
 export default function Root() {
   const theme = useTheme()
 
-  const Stack = createStackNavigator<RootStackParamList>()
+  const Stack = createStackNavigator<HomeStackParamList>()
 
   const customHeader = {
     headerStyle: {

@@ -5,7 +5,7 @@ import { Chip, Paragraph, Title } from "react-native-paper"
 import { ScrollView } from "react-native-gesture-handler"
 import { RouteProp } from "@react-navigation/native"
 
-import { RootStackParamList } from "../interfaces/routesInterfaces"
+import { HomeStackParamList } from "../interfaces/routesInterfaces"
 
 import { IFullJob, ITag } from "../interfaces/jobInterfaces"
 import { JOB_BY_SLUG_QUERY } from "../queries/jobQueries"
@@ -14,9 +14,9 @@ import styles from "./__styles__/JobDetailsScreen.styles"
 import Layout from "../components/Layout"
 import { StackNavigationProp } from "@react-navigation/stack"
 
-type RootStackComponent<RouteName extends keyof RootStackParamList> = React.FC<{
-  navigation: StackNavigationProp<RootStackParamList, RouteName>
-  route: RouteProp<RootStackParamList, RouteName>
+type RootStackComponent<RouteName extends keyof HomeStackParamList> = React.FC<{
+  navigation: StackNavigationProp<HomeStackParamList, RouteName>
+  route: RouteProp<HomeStackParamList, RouteName>
 }>
 
 const JobDetailsScreen: RootStackComponent<"JobDetails"> = ({ route }) => {

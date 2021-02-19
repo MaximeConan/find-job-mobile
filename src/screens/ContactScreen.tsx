@@ -3,16 +3,16 @@ import { RouteProp } from "@react-navigation/core"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { Text } from "react-native"
 
-import { RootStackParamList } from "../interfaces/routesInterfaces"
+import { RootTabParamList } from "../interfaces/routesInterfaces"
 
 import Layout from "../components/Layout"
 
-type RootStackComponent<RouteName extends keyof RootStackParamList> = React.FC<{
-  navigation: StackNavigationProp<RootStackParamList, RouteName>
-  route: RouteProp<RootStackParamList, RouteName>
+type RootTabComponent<RouteName extends keyof RootTabParamList> = React.FC<{
+  navigation: StackNavigationProp<RootTabParamList, RouteName>
+  route: RouteProp<RootTabParamList, RouteName>
 }>
 
-const ContactScreen: RootStackComponent<"Contact"> = () => {
+const ContactScreen: RootTabComponent<"Contact"> = () => {
   return (
     <Layout>
       <Text>Contact Screen</Text>
